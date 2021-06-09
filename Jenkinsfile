@@ -1,10 +1,13 @@
 pipeline {
-    agent any
+    agent {label "linux"}
 
     stages {
         stage('Build') {
             steps {
                 echo 'Building..'
+                sh """
+                 docker build -t hello_there .
+                """
             }
         }
         stage('Test') {
@@ -15,6 +18,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                sh """
+                  docker run --rm hello_there
+                """
             }
         }
     }
