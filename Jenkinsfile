@@ -8,12 +8,11 @@ pipeline {
                 sh "docker build -t hello_there . "
             }
         }
-        def IMAGE_ID= sh "${(docker images --filter=reference=image_name --format "{{.ID}}")}"
 
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh "trivy image -f table --severity HIGH ${IMAGE_ID}"
+                sh "trivy image -f table --severity HIGH hello_there"
             }
         }
         stage('Deploy') {
