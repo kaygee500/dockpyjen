@@ -7,16 +7,15 @@ pipeline {
                 echo 'Building..'
                 sh """
                  docker build -t hello_there .
-                 IMAGE_ID=\$(docker images --filter=reference=image_name --format "{{.ID}}")
-                """
+                 """
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh """
-                  trivy image -f table --severity HIGH \$IMAGE_ID
-                """
+                //sh """
+                //  trivy image -f table --severity HIGH \$IMAGE_ID
+                //"""
             }
         }
         stage('Deploy') {
