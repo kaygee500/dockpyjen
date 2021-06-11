@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo 'Testing..'
                 sh """
-                  trivy image $IMAGE_ID
+                  trivy image \$IMAGE_ID
                 """
             }
         }
