@@ -5,25 +5,21 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh """
-                 docker build -t hello_there .
-                 """
+                sh "docker build -t hello_there . "
             }
         }
+        def IMAGE_ID=$(sudo docker images --filter=reference=image_name --format "{{.ID}}")
+
         stage('Test') {
             steps {
                 echo 'Testing..'
-                //sh """
-                //  trivy image -f table --severity HIGH \$IMAGE_ID
-                //"""
+                sh "trivy image -f table --severity HIGH ${IMAGE_ID}"
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh """
-                  docker run --rm hello_there
-                """
+                sh "docker run --rm hello_there"
             }
         }
     }
