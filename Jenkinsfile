@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo 'Testing..'
                 sh """
-                  trivy image -f table --severity HIGH, CRITICAL \$IMAGE_ID
+                  trivy image -f json -o json --severity HIGH \$IMAGE_ID
                 """
             }
         }
