@@ -14,7 +14,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh"""
+                sh """
                   trivy image $IMAGE_ID
                 """
             }
