@@ -8,7 +8,7 @@ pipeline {
                 sh "docker build -t hello_there . "
             }
         }
-        def IMAGE_ID=$(sudo docker images --filter=reference=image_name --format "{{.ID}}")
+        def IMAGE_ID=$(sh "docker images --filter=reference=image_name --format "{{.ID}}"")
 
         stage('Test') {
             steps {
