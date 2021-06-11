@@ -7,7 +7,7 @@ pipeline {
                 echo 'Building..'
                 sh """
                  docker build -t hello_there .
-                 IMAGE_ID=$(docker images --filter=reference=image_name --format "{{.ID}}")
+                 IMAGE_ID=\$(docker images --filter=reference=image_name --format "{{.ID}}")
                 """
             }
         }
